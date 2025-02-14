@@ -1,0 +1,165 @@
+---
+// Archivo: src/components/Logros.astro
+
+
+import '@fortawesome/fontawesome-free/css/all.min.css';
+const logros = [
+  {
+    fecha: "2023",
+    titulo: "Graduación Universitaria",
+    descripcion: "Obtuve mi título en Ingeniería Informática con honores.",
+    icono: "graduation-cap",
+  },
+  /* {
+    fecha: "2022",
+    titulo: "Práctica Profesional",
+    descripcion: "Completé una práctica de 6 meses en una empresa líder en tecnología.",
+    icono: "briefcase",
+  },
+  {
+    fecha: "2021",
+    titulo: "Proyecto de Código Abierto",
+    descripcion: "Contribuí significativamente a un proyecto de código abierto popular.",
+    icono: "code-branch",
+  },
+  {
+    fecha: "2020",
+    titulo: "Hackathon Nacional",
+    descripcion: "Gané el primer lugar en un hackathon nacional de innovación tecnológica.",
+    icono: "trophy",
+  }, */
+];
+---
+
+<section class="logros">
+  <h2 class="logros-titulo">Mis Logros</h2>
+  <div class="logros-grid">
+    {logros.map((logro, index) => (
+      <div class="logro-card" data-index={index}>
+        <div class="logro-icono">
+          <i class={`fas fa-${logro.icono}`} aria-hidden="true"></i>
+        </div>
+        <h3 class="logro-fecha">{logro.fecha}</h3>
+        <h4 class="logro-titulo">{logro.titulo}</h4>
+        <p class="logro-descripcion">{logro.descripcion}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .logros {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 2rem;
+    padding-bottom: 1rem;
+    
+  }
+
+  .logros-titulo {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+  }
+
+  .logros-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .logro-card {
+    background: #333;
+    color: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    position: relative;
+    padding-left: 35px;
+  }
+
+  .logro-icono {
+    width: 3rem;
+    height: 3rem;
+    background: #3498db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    position: absolute;
+    left: -20px;
+  }
+
+  .logro-fecha {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+  }
+
+  .logro-titulo {
+    font-size: 1.25rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .logro-descripcion {
+    font-size: 1rem;
+    color: #7f8c8d;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .logros-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const logroCards = document.querySelectorAll('.logro-card');
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    logroCards.forEach(card => {
+      observer.observe(card);
+    });
+  });
+</script>
+
+<style is:global>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .logro-card.animate {
+    animation: fadeInUp 0.6s ease forwards;
+  }
+</style>

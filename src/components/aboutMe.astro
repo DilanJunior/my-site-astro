@@ -1,0 +1,142 @@
+---
+// src/pages/about.astro
+
+const socialLinks = [
+  { name: "GitHub", url: "https://github.com/yourusername", icon: "github" },
+  {
+    name: "LinkedIn",
+    url: "https://linkedin.com/in/yourusername",
+    icon: "linkedin",
+  },
+  { name: "Twitter", url: "https://twitter.com/yourusername", icon: "twitter" },
+  {
+    name: "Instagram",
+    url: "https://instagram.com/yourusername",
+    icon: "instagram",
+  },
+];
+---
+
+<main>
+  <section class="about-me">
+    <img
+      src="https://codersfree.nyc3.cdn.digitaloceanspaces.com/posts/que-hace-un-desarrollador-web.jpg"
+      alt="Dylan Lara Hernández"
+      class="profile-image"
+    />
+    <div>
+      <h1>Dylan Lara Hernández</h1>
+      <p class="tagline">Desarrollador Web | Entusiasta de la Tecnología</p>
+      <div class="bio">
+        <p>
+          ¡Hola! Soy Dylan, un apasionado desarrollador web con experiencia en
+          crear soluciones digitales innovadoras. Me especializo en tecnologías
+          front-end como React, y tengo un fuerte interés en el diseño
+          UX/UI.
+        </p>
+      </div>
+      <div class="social-links">
+        {
+          socialLinks.map((link) => (
+            <a
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon"
+            >
+              <i class={`fab fa-${link.icon}`} aria-hidden="true" />
+              <span class="sr-only">{link.name}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</main>
+
+<style>
+  .about-me {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    text-align: center;
+    max-width: 900px;
+  }
+
+  .profile-image {
+    width: 220px;
+    height:220px;
+
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+  }
+  h1 {
+    color: #f0f0f0; /* Color blanco para el título */
+    font-size: 2.5rem; /* Tamaño de letra más grande */
+    margin-bottom: 0.5rem;
+  }
+
+  .tagline {
+    color: #b0b0b0; /* Color gris claro para el subtítulo */
+    font-style: italic;
+    font-size: 1.25rem; /* Tamaño de letra más grande */
+    margin-bottom: 1rem;
+  }
+
+  .bio {
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  .bio p {
+    font-size: 1.1rem; /* Tamaño de letra ligeramente mayor */
+  }
+
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem; /* Espacio más amplio entre íconos */
+  }
+
+  .social-icon {
+    font-size: 1.2rem; /* Tamaño de ícono más grande */
+    color: #fff; /* Color de ícono claro */
+    transition: all 0.3s ease;
+    border-radius: 20px;
+    border: 1px solid #b0b0b0;
+    padding: 10px 15px;
+    text-decoration: none;
+    background-color: #3498db;
+  }
+
+  .social-icon:hover {
+    background-color: #007bff; /* Color de enlace en hover */
+  }
+
+  @media (max-width: 768px) {
+    .about-me {
+      padding: 1.5rem;
+      display: block;
+      margin-top: 1rem;
+    }
+
+    .profile-image {
+      width: 190px;
+      height: 190px;
+    }
+
+    h1 {
+      font-size: 2rem; /* Ajustar tamaño de letra en pantallas más pequeñas */
+    }
+
+    .tagline {
+      font-size: 1rem; /* Ajustar tamaño de letra en pantallas más pequeñas */
+    }
+
+    .bio p {
+      font-size: 1rem; /* Ajustar tamaño de letra en pantallas más pequeñas */
+    }
+  }
+</style>
